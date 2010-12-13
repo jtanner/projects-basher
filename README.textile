@@ -1,0 +1,26 @@
+h1. Projects Bash(er)
+
+Creates aliases for all your projects and an each-project function to run commands over all projects or a subset.
+
+h2. Installation
+
+* set BASHER_LIST as a comma joined list of directory,alias pairs
+* set BASHER_ROOT
+* source init.bash
+
+<pre>
+BASHER_ROOT='~/projects'
+BASHER_LIST='admin,ad superapp,sa littleapp,la'
+</pre>
+
+h2. How to use
+
+Aliases will be created for each directory/alias pair in the root directory.
+
+<pre>
+~ $ ad
+~/projects/admin $
+</pre>
+
+The _each-project_ function can be used to run commands over all the projects or a subset.
+A separate history will be kept for both the project subsets and the commands.
