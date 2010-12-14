@@ -6,8 +6,8 @@ function each-project {
   touch ~/.projectcommand.history
   trap 'echo; history -r; return 0' INT TERM EXIT
 
-  DSPROJECTS='ad da ds ld le lg lr om rp tx'
-  COMMAND=''
+  local DSPROJECTS='ad da ds ld le lg lr om rp tx'
+  local COMMAND=''
 
   # get project list
   history -r ~/.projectlist.history
@@ -21,7 +21,7 @@ function each-project {
       history) history
         ;;
       *)
-        PL_SIZE=0
+        local PL_SIZE=0
         for a in $PROJECTLIST; do PL_SIZE=$[PL_SIZE+1]; done
         if (($PL_SIZE > 0)); then
           DSPROJECTS=$PROJECTLIST
@@ -48,7 +48,7 @@ function each-project {
         history -s "$COMMAND"
         for a in $DSPROJECTS
         do
-          MYDIR=`pwd`
+          local MYDIR=`pwd`
           eval $a
           echo -e "\033[1;32m"`pwd`"\033[0m" "[\033[1;33m"$a"\033[0m]"
           eval $COMMAND
