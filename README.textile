@@ -9,8 +9,10 @@ h2. Installation
 * source init.bash
 
 <pre>
+# in ~/.bashrc
 BASHER_ROOT='~/projects'
 BASHER_LIST='admin,ad superapp,sa littleapp,la'
+. ~/.bash.d/projects-basher/init.bash
 </pre>
 
 h2. How to use
