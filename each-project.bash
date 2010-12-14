@@ -4,7 +4,7 @@ function each-project {
   history -c
   touch ~/.projectlist.history
   touch ~/.projectcommand.history
-  trap 'history -r; trap - INT TERM EXIT; return 0' INT TERM EXIT
+  trap 'history -c; history -r; trap - INT TERM EXIT; return 0' INT TERM EXIT
 
   local DSPROJECTS='ad da ds ld le lg lr om rp tx'
   local COMMAND=''
@@ -25,11 +25,11 @@ function each-project {
         if (($PL_SIZE > 0)); then
           DSPROJECTS=$PROJECTLIST
           history -s "$PROJECTLIST"
+          history -w ~/.projectlist.history
         fi
         break
     esac
   done
-  history -w ~/.projectlist.history
   history -c
 
   # get and run command
@@ -43,6 +43,7 @@ function each-project {
       history) history ;;
       *)
         history -s "$COMMAND"
+        history -w ~/.projectcommand.history
         for a in $DSPROJECTS
         do
           local MYDIR=`pwd`
@@ -56,10 +57,9 @@ function each-project {
         done
     esac
   done
-  history -w ~/.projectcommand.history
-  history -c
   
   # cleanup
+  history -c
   history -r
   trap - INT TERM EXIT
 }
