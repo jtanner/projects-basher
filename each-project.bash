@@ -4,22 +4,21 @@ function each-project {
   history -c
   touch ~/.projectlist.history
   touch ~/.projectcommand.history
-  trap 'echo; history -r; return 0' INT TERM EXIT
+  trap 'history -r; trap - INT TERM EXIT; return 0' INT TERM EXIT
 
   local DSPROJECTS='ad da ds ld le lg lr om rp tx'
   local COMMAND=''
 
   # get project list
   history -r ~/.projectlist.history
-  while true
+  echo -e "\033[1;31mFor each project alias \033[0m(default: " $DSPROJECTS "):"
+  while read -p '> ' -e PROJECTLIST
   do
-    echo "For each project alias (default: " $DSPROJECTS "):"
-    read -p '> ' -e PROJECTLIST
     case "$PROJECTLIST" in
-      stop) break
-        ;;
-      history) history
-        ;;
+      exit) kill $$ ;;
+      quit) kill $$ ;;
+      q)    kill $$ ;;
+      history) history ;;
       *)
         local PL_SIZE=0
         for a in $PROJECTLIST; do PL_SIZE=$[PL_SIZE+1]; done
@@ -35,15 +34,13 @@ function each-project {
 
   # get and run command
   history -r ~/.projectcommand.history
-  while true
+  while echo -e "\033[1;31mrun command: \033[0m" && read -p '> ' -e COMMAND
   do
-    echo "run command:"
-    read -p '> ' -e COMMAND
     case "$COMMAND" in
-      stop) break
-        ;;
-      history) history
-        ;;
+      exit) kill $$ ;;
+      quit) kill $$ ;;
+      q)    kill $$ ;;
+      history) history ;;
       *)
         history -s "$COMMAND"
         for a in $DSPROJECTS
@@ -55,7 +52,6 @@ function each-project {
           echo
           cd $MYDIR
         done
-        break
     esac
   done
   history -w ~/.projectcommand.history

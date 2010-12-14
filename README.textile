@@ -1,6 +1,6 @@
 h1. Projects Bash(er)
 
-Creates aliases for all your projects and an each-project function to run commands over all projects or a subset.
+Creates aliases for all your projects and an _each-project_ function to run one or more commands over all projects or a subset.
 
 h2. Installation
 
@@ -24,3 +24,20 @@ Aliases will be created for each directory/alias pair in the root directory.
 
 The _each-project_ function can be used to run commands over all the projects or a subset.
 A separate history will be kept for both the project subsets and the commands.
+Type "quit", "q", ctrl-c, or ctrl-d to exit.
+
+<pre>
+~ $ each-project 
+For each project alias (default:  ad sa la ):
+> ad sa
+run command: 
+> ls
+/Users/joe/projects/admin [ad]
+File1		File2
+
+/Users/joe/projects/superapp [sa]
+File3		File4
+
+run command: 
+> q
+</pre>
