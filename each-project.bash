@@ -47,8 +47,10 @@ function each-project {
         do
           local MYDIR=`pwd`
           eval $a
-          echo -e "\033[1;32m"`pwd`"\033[0m" "[\033[1;33m"$a"\033[0m]"
-          eval $COMMAND
+          if [ $? -eq 0 ]; then # alias worked
+            echo -e "\033[1;32m"`pwd`"\033[0m" "[\033[1;33m"$a"\033[0m]"
+            eval $COMMAND
+          fi
           echo
           cd $MYDIR
         done
